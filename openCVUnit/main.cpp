@@ -1,43 +1,73 @@
-#include "opencv2/imgproc/imgproc.hpp"
-#include "opencv2/highgui/highgui.hpp"
-#include <stdlib.h>
-#include <stdio.h>
+#include "baseapi.h"
+#include "allheaders.h"
 
-using namespace cv;
-
-/// Global variables
-
-int threshold_value = 0;
-int threshold_type = 3;
-int const max_value = 255;
-int const max_type = 4;
-int const max_BINARY_value = 255;
-
-Mat src, src_gray, dst;
-constexpr const char* window_name = "Threshold Demo";
-
-constexpr const char* trackbar_type = "Type: \n 0: Binary \n 1: Binary Inverted \n 2: Truncate \n 3: To Zero \n 4: To Zero Inverted";
-constexpr const char* trackbar_value = "Value";
-static constexpr const char* imgPath = "./data/phototest.tif";
-
-/// Function headers
-void Threshold_Demo( int, void* );
-
-/**
- * @function main
- */
-int main (int argc, char** argv)
+int main()
 {
+    char *outText;
+
+    tesseract::TessBaseAPI *api = new tesseract::TessBaseAPI();
+    // Initialize tesseract-ocr with English, without specifying tessdata path
+    if (api->Init(NULL, "eng")) {
+        fprintf(stderr, "Could not initialize tesseract.\n");
+        exit(1);
+    }
+
+    // Open input image with leptonica library
+    Pix *image = pixRead("/usr/src/tesseract/testing/phototest.tif");
+    api->SetImage(image);
+    // Get OCR result
+    outText = api->GetUTF8Text();
+    printf("OCR output:\n%s", outText);
+
+    // Destroy used object and release memory
+    api->End();
+    delete [] outText;
+    pixDestroy(&image);
+
+    return 0;
+}
+
+
+//#include "opencv2/imgproc/imgproc.hpp"
+//#include "opencv2/highgui/highgui.hpp"
+//#include <stdlib.h>
+//#include <stdio.h>
+
+//using namespace cv;
+
+///// Global variables
+
+//int threshold_value = 0;
+//int threshold_type = 3;
+//int const max_value = 255;
+//int const max_type = 4;
+//int const max_BINARY_value = 255;
+
+//Mat src, src_gray, dst;
+//constexpr const char* window_name = "Threshold Demo";
+
+//constexpr const char* trackbar_type = "Type: \n 0: Binary \n 1: Binary Inverted \n 2: Truncate \n 3: To Zero \n 4: To Zero Inverted";
+//constexpr const char* trackbar_value = "Value";
+//static constexpr const char* imgPath = "./data/phototest.tif";
+
+///// Function headers
+//void Threshold_Demo( int, void* );
+
+///**
+// * @function main
+// */
+//int main (int argc, char** argv)
+//{
   /// Load an image
-    src = imread(imgPath, CV_8UC1);
+//    src = imread(imgPath, CV_8UC1);
 
-    medianBlur(src, src, 5);
+//    medianBlur(src, src, 5);
 
-    adaptiveThreshold(src, dst, 255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 11, 2);
+//    adaptiveThreshold(src, dst, 255, ADAPTIVE_THRESH_GAUSSIAN_C, THRESH_BINARY, 11, 2);
 
-    //namedWindow( "Display window", WINDOW_AUTOSIZE );
-    imshow(window_name, dst);
-     waitKey( 0 );
+//    //namedWindow( "Display window", WINDOW_AUTOSIZE );
+//    imshow(window_name, dst);
+//     waitKey( 0 );
 
 //  /// Convert the image to Gray
 //  cvtColor( src, src_gray, CV_BGR2GRAY );
@@ -78,19 +108,19 @@ int main (int argc, char** argv)
 }
 
 
-/**
- * @function Threshold_Demo
- */
-void Threshold_Demo( int, void* )
-{
-  /* 0: Binary
-     1: Binary Inverted
-     2: Threshold Truncated
-     3: Threshold to Zero
-     4: Threshold to Zero Inverted
-   */
+///**
+// * @function Threshold_Demo
+// */
+//void Threshold_Demo( int, void* )
+//{
+//  /* 0: Binary
+//     1: Binary Inverted
+//     2: Threshold Truncated
+//     3: Threshold to Zero
+//     4: Threshold to Zero Inverted
+//   */
 
-  threshold( src_gray, dst, threshold_value, max_BINARY_value,threshold_type );
+//  threshold( src_gray, dst, threshold_value, max_BINARY_value,threshold_type );
 
-  imshow( window_name, dst );
-}
+//  imshow( window_name, dst );
+//}

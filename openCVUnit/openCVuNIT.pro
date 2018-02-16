@@ -3,7 +3,7 @@ CONFIG += console c++11
 CONFIG -= app_bundle
 CONFIG -= qt
 
-INCLUDEPATH += "C:\opencv\build\include"
+INCLUDEPATH += $$PWD/../3rdParty/include
 
 LIBS += -L"C:\opencv\build\lib\Release" -lopencv_highgui330 \
                                         -lopencv_core330 \
