@@ -76,8 +76,8 @@ void Backend::speechToText (const QString &lang)
 
 void Backend::ocr(const QString &imgPath)
 {
-    QString scriptPath =  QCoreApplication::applicationDirPath() + "/../../BoostTest/scripts/ts.jpg";
-    QFile scriptFile(scriptPath);
+    QString imgPath =  QCoreApplication::applicationDirPath() + "/../../BoostTest/scripts/ts.jpg";
+    QFile scriptFile(imgPath);
     if (!scriptFile.exists()){
         qDebug() << "Error no sts scriptfile";
         return;
@@ -94,7 +94,7 @@ void Backend::ocr(const QString &imgPath)
 
         connect(process, static_cast<void (QProcess::*)(int)>(&QProcess::finished), process, &QProcess::deleteLater);
 
-        QStringList tesseractCommandArguments = QStringList() << scriptPath;
+        QStringList tesseractCommandArguments = QStringList() << imgPath;
 
         qDebug() << "TessCommand: " << tesseractCommandArguments;
         process->start ("tesseract.exe", tesseractCommandArguments);
