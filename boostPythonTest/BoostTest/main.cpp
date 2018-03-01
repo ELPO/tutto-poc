@@ -1,7 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
-#include "backend.h"
+#include "Backend.h"
 
 int main(int argc, char *argv[])
 {

@@ -13,11 +13,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp \
-    Backend.cpp
+    Backend.cpp \
+    audiorecorder.cpp
 
 RESOURCES += qml.qrc
 
-INCLUDEPATH += "C:\Program Files\boost\boost_1_55_0"
+INCLUDEPATH += $$PWD\..\3rdPdarty\SFML\include
 
 #LIBS += -L"C:\Program Files\boost\boost_1_55_0\stage\lib" -llibboost_locale-vc-mt-1_55
 
@@ -35,4 +36,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES +=
 
 HEADERS += \
-    Backend.h
+    Backend.h \
+    audiorecorder.h
