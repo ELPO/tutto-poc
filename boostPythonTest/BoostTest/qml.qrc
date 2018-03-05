@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>main.qml</file>
-        <file>TestStT.qml</file>
-        <file>TestCamera.qml</file>
-        <file>TestTtS.qml</file>
-        <file>Resources/playing.gif</file>
-    </qresource>
-</RCC>

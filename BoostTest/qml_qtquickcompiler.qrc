@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<RCC>
+    <qresource prefix="/">
+        <file alias="Resources/playing.gif">Resources/playing.gif</file>
+    </qresource>
+</RCC>
