@@ -76,8 +76,8 @@ void Backend::speechToText (const QString &lang)
 
 void Backend::ocr(const QString &imgPath)
 {
-    QString imgPath =  QCoreApplication::applicationDirPath() + "/../../BoostTest/scripts/ts.jpg";
-    QFile scriptFile(imgPath);
+    QString imPath =  QCoreApplication::applicationDirPath() + "/../../BoostTest/scripts/ts.jpg";
+    QFile scriptFile(imPath);
     if (!scriptFile.exists()){
         qDebug() << "Error no sts scriptfile";
         return;

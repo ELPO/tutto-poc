@@ -1,7 +1,7 @@
 #ifndef AUDIORECORDER_H
 #define AUDIORECORDER_H
 
-#include "sound.hpp"
+#include <SFML/Audio.hpp>
 
 class AudioRecorder : public sf::SoundRecorder
 {

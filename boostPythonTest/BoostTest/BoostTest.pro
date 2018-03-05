@@ -18,7 +18,7 @@ SOURCES += main.cpp \
 
 RESOURCES += qml.qrc
 
-INCLUDEPATH += $$PWD\..\3rdPdarty\SFML\include
+INCLUDEPATH += $$PWD/../../3rdParty/SFML/include
 
 #LIBS += -L"C:\Program Files\boost\boost_1_55_0\stage\lib" -llibboost_locale-vc-mt-1_55
 
@@ -33,7 +33,11 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES +=
+DISTFILES += \
+    scripts/ocr.py \
+    scripts/stt.py \
+    scripts/tts.py \
+    scripts/voiceDetect.py
 
 HEADERS += \
     Backend.h \
