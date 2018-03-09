@@ -1,41 +1,40 @@
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
-
-#include "Backend.h"
+#include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-#include <SFML/Audio/Sound.hpp>
 
-#include <QTime>
-#include <QCoreApplication>
-
-int main(int argc, char *argv[])
+int main()
 {
+    // create the window
+    sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
 
-    if (!sf::SoundBufferRecorder::isAvailable())
+    // run the program as long as the window is open
+    while (window.isOpen())
     {
-        // error: audio capture is not available on this system
+        // check all the window's events that were triggered since the last iteration of the loop
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // "close requested" event: we close the window
+            if (event.type == sf::Event::Closed)
+                window.close();
+        }
 
+        // clear the window with black color
+        window.clear(sf::Color::Red);
+
+
+        // draw everything here...
+        // window.draw(...);
+
+        // end the current frame
+        window.display();
+
+        sf::Sound s;
+        s.stop();
     }
 
-    // create the recorder
-    sf::SoundBufferRecorder recorder;
+;
 
-    // start the capture
-    recorder.start();
-
-    // wait...
-    QTime dieTime= QTime::currentTime().addSecs(5);
-    while (QTime::currentTime() < dieTime)
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
-
-    // stop the capture
-    recorder.stop();
-
-    // retrieve the buffer that contains the captured audio data
-    const sf::SoundBuffer& buffer = recorder.getBuffer();
-    sf::Sound sound;
-    sound.setBuffer(buffer);
-    sound.play();
+    return 0;
 }
 //#if defined(Q_OS_WIN)
 //    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);

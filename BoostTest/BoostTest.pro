@@ -36,7 +36,7 @@ defineTest(copyToBuildDir) {
 # SFML
 INCLUDEPATH += $$PWD/../3rdParty/SFML/include
 win32:CONFIG(release, debug|release): {
-    LIBS += -L$$PWD/../3rdParty/SFML/lib/Release/ -lsfml-audio
+    LIBS += -L$$PWD/../3rdParty/SFML/lib/Release/ -lsfml-graphics -lsfml-system -lsfml-window -lsfml-audio
 }
 
 win32 {
@@ -53,6 +53,8 @@ CONFIG( debug, debug|release ) {
     DEPLOY_TARGET = $$shell_quote($$shell_path($${OUT_PWD}/debug/$${TARGET}$${TARGET_EXT}))
 } else {
     RELEASE_LIBS = $$PWD/../3rdParty/SFML/bin/Release/sfml-audio-2.dll \
+                   $$PWD/../3rdParty/SFML/bin/Release/sfml-graphics-2.dll \
+                   $$PWD/../3rdParty/SFML/bin/Release/sfml-window-2.dll \
                    $$PWD/../3rdParty/SFML/bin/Release/sfml-system-2.dll \
                    $$PWD/../3rdParty/SFML/bin/Release/openal32.dll
     copyToBuildDir($$RELEASE_LIBS)
@@ -69,7 +71,7 @@ CONFIG( debug, debug|release ) {
 }
 
 #  # Uncomment the following line to help debug the deploy command when running qmake
-#  warning($${DEPLOY_COMMAND} $${DEPLOY_TARGET})
+#  warning($${DEPLOY_OMMAND} $${DEPLOY_TARGET})
 
 # Use += instead of = if you use multiple QMAKE_POST_LINKs
 QMAKE_POST_LINK += $${DEPLOY_COMMAND} $${DEPLOY_TARGET}
