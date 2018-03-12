@@ -2,8 +2,10 @@
 
 #include <QTime>
 #include <QCoreApplication>
+#include <QDebug>
 
-AudioRecorder::AudioRecorder()
+AudioRecorder::AudioRecorder() :
+    sf::SoundRecorder()
 {
     // first check if an input audio device is available on the system
 //    if (!sf::SoundBufferRecorder::isAvailable())
@@ -31,4 +33,20 @@ AudioRecorder::AudioRecorder()
 //    sf::Sound sound;
 //    sound.setBuffer(buffer);
 //    sound.play();
+}
+
+bool AudioRecorder::onStart()
+{
+    return true;
+}
+
+bool AudioRecorder::onProcessSamples(const sf::Int16* Samples, std::size_t SamplesCount)
+{
+    qDebug() << SamplesCount;
+    return true;
+}
+
+void AudioRecorder::onStop()
+{
+
 }

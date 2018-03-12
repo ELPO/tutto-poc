@@ -3,13 +3,34 @@
 #include <QDebug>
 #include <QCoreApplication>
 #include <QTemporaryFile>
-
 #include <QStandardPaths>
 
 Backend::Backend(QObject *parent)
     : QObject(parent)
     , m_speechFile()
+    , m_recorder(std::make_unique<AudioRecorder>())
 {
+    if (!sf::SoundBufferRecorder::isAvailable())
+    {
+        // error: audio capture is not available on this system
+
+    }
+
+    // create the recorder
+
+
+    // start the capture
+    m_recorder->start();
+    // stop the capture
+
+}
+
+Backend::~Backend()
+{
+    m_recorder->stop();
+    // retrieve the buffer that contains the captured audio data
+    const sf::SoundBuffer& buffer = m_recorder->getBuffer();
+    buffer.saveToFile("C://Users//Sommerwild//Desktop//audios//test.wav");
 }
 
 void Backend::textToSpeech (const QString &text, const QString &lang)

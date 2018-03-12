@@ -7,6 +7,10 @@ class AudioRecorder : public sf::SoundRecorder
 {
 public:
     AudioRecorder();
+
+    virtual bool onStart();
+    virtual bool onProcessSamples(const sf::Int16* Samples, std::size_t SamplesCount);
+    virtual void onStop();
 };
 
 #endif // AUDIORECORDER_H

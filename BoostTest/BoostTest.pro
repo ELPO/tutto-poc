@@ -45,7 +45,7 @@ win32 {
         TARGET_EXT = ".exe"
     }
 
-    DEPLOY_COMMAND = windeployqt
+    DEPLOY_COMMAND = windeployqt --qmldir "C:\Qt\5.10\msvc2015_64\qml"
 }
 
 CONFIG( debug, debug|release ) {
